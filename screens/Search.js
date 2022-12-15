@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  useColorScheme
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,6 +24,7 @@ const Search = () => {
   let [translation, setTranslation] = useState('t_kjv');
 
   const navigation = useNavigation();
+  const isDarkMode = useColorScheme() === 'dark';
 
   const loadSearch = async () => {
     setFlatListItems([]);
