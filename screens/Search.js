@@ -6,7 +6,7 @@ import {
   Image,
   ScrollView,
   TextInput,
-  useColorScheme
+  useColorScheme,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -52,7 +52,7 @@ const Search = () => {
             let verseNumber = {
               fontSize: 16,
               paddingLeft: 12,
-              color: 'red',
+              color: isDarkMode ? '#ffffff' : '#030303',
             };
 
             let verseText = {

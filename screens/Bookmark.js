@@ -49,7 +49,7 @@ const Bookmark = () => {
             let verseNumber = {
               fontSize: 16,
               paddingLeft: 12,
-              color: 'red',
+              color: isDarkMode ? '#FF0000' : '#030303',
             };
 
             let verseText = {
