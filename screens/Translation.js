@@ -22,6 +22,7 @@ const Translation = ({navigation}) => {
     const dim = Dimensions.get('screen');
     return dim.height >= dim.width;
   };
+
   let [flatListItems, setFlatListItems] = useState([]);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const Translation = ({navigation}) => {
             flexDirection: isPortrait() ? 'column' : 'row',
             display: 'flex',
             marginRight: isPortrait() ? 0 : 50,
-            color: isDarkMode ? '#ffffff' : '#000000',
+            color: isDarkMode ? '#ffffff' : '#030303',
           };
 
           let verseText = {
@@ -47,7 +48,7 @@ const Translation = ({navigation}) => {
             fontSize: 16,
             padding: 20,
             textAlign: 'center',
-            color: isDarkMode ? '#ffffff' : '#000000',
+            color: isDarkMode ? '#ffffff' : '#030303',
           };
 
           for (let i = 0; i < dataLength; i++) {
@@ -76,7 +77,12 @@ const Translation = ({navigation}) => {
     navigation.goBack();
   };
 
-  const parentView = {display: 'flex', flexDirection: 'column', height: '100%'};
+  const parentView = {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
+  };
 
   return (
     <View style={parentView}>

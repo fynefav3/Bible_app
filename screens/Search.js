@@ -3,10 +3,10 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
   TextInput,
   useColorScheme,
+  Keyboard,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +19,7 @@ const Search = () => {
     name: 'bible-sqlite.db',
     createFromLocation: 1,
   });
+
   let [flatListItems, setFlatListItems] = useState([]);
   let [searchText, setSearchText] = useState('');
   let [translation, setTranslation] = useState('t_kjv');
@@ -27,6 +28,8 @@ const Search = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const loadSearch = async () => {
+    Keyboard.dismiss();
+
     setFlatListItems([]);
 
     const trnl = await AsyncStorage.getItem('bible_version');
@@ -61,6 +64,7 @@ const Search = () => {
               paddingBottom: 12,
               paddingLeft: 10,
               paddingRight: 10,
+              color: isDarkMode ? '#ffffff' : '#030303',
             };
 
             for (let i = 0; i < dataLength; i++) {
@@ -89,42 +93,49 @@ const Search = () => {
     });
   };
 
+  const parentView = {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingTop: 80,
+    height: '100%',
+    backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
+  };
+
+  const iconColor = isDarkMode ? '#ffffff' : '#030303';
+
+  const textOne = {
+    height: 40,
+    width: '80%',
+    borderColor: isDarkMode ? '#ffffff' : '#030303',
+    borderWidth: 1,
+    marginLeft: 10,
+    paddingHorizontal: 10,
+    color: isDarkMode ? '#ffffff' : '#030303',
+  };
+
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        paddingTop: 80,
-        height: '100%',
-      }}>
+    <View style={parentView}>
       <View style={styles.viewOne}>
         <Icon
           onPress={() => navigation.navigate('Home')}
           name="arrow-left"
           size={20}
-          color="#050505"
-          style={{paddingLeft: 20}}
+          color={iconColor}
         />
-
-        <TextInput
-          style={styles.textOne}
-          onChangeText={v => setSearchText(v)}
+        <View style={styles.xSpacer} />
+        <TextInput style={textOne} onChangeText={v => setSearchText(v)} />
+        <View style={styles.xSpacer} />
+        <Icon
+          onPress={() => loadSearch()}
+          name="search"
+          size={20}
+          color={iconColor}
         />
-        <TouchableOpacity onPress={() => loadSearch()}>
-          <Image
-            source={require('../assets/searchs.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
       </View>
 
       <Text style={styles.textTwo}>Search results:</Text>
-      <ScrollView
-        style={{
-          flex: 1,
-        }}>
-        {flatListItems}
-      </ScrollView>
+      <View style={styles.ySpacer} />
+      <ScrollView style={styles.expanded}>{flatListItems}</ScrollView>
     </View>
   );
 };
@@ -137,18 +148,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
-  textOne: {
-    height: 40,
-    width: '80%',
-    borderColor: '#030303',
-    borderWidth: 1,
-    marginLeft: 10,
-  },
+
   textTwo: {
     paddingLeft: 40,
     fontSize: 18,
-    color: '#030303',
+    color: 'red',
     paddingTop: 20,
   },
   textThree: {
@@ -157,6 +163,15 @@ const styles = StyleSheet.create({
     color: '#ff0000',
     paddingTop: 20,
     fontWeight: 'bold',
+  },
+  xSpacer: {
+    width: 20,
+  },
+  ySpacer: {
+    height: 20,
+  },
+  expanded: {
+    flex: 1,
   },
   textFour: {paddingLeft: 40, fontSize: 18, color: '#030303'},
   image: {paddingLeft: 40, fontSize: 18, color: '#030303'},

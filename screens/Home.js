@@ -193,12 +193,12 @@ const Home = () => {
               'INSERT INTO bookmark (b, c, v) VALUES (?,?,?)',
               [b, c, v],
               function (_, __) {
-                console.log('Results', res.rowsAffected);
-                if (res.rowsAffected > 0) {
-                  Alert.alert('Bible verse added to bookmark');
-                } else {
-                  Alert.alert('Failed....');
-                }
+                // console.log('Results', res.rowsAffected);
+                // if (res.rowsAffected > 0) {
+                Alert.alert('Bible verse added to bookmark');
+                // else {
+                //   Alert.alert('Failed....');
+                // }
               },
             );
           }

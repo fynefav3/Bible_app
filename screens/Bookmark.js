@@ -58,6 +58,7 @@ const Bookmark = () => {
               paddingBottom: 12,
               paddingLeft: 10,
               paddingRight: 10,
+              color: isDarkMode ? '#ffffff' : '#030303',
             };
 
             for (let i = 0; i < dataLength; i++) {
@@ -85,10 +86,15 @@ const Bookmark = () => {
       );
     });
   };
-
+  
   const removeBookmark = id => {};
 
-  const parentView = {display: 'flex', flexDirection: 'column', height: '100%'};
+  const parentView = {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
+  };
 
   return (
     <View style={parentView}>

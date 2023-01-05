@@ -3,6 +3,7 @@ import {
   Text,
   View,
   ScrollView,
+  useColorScheme,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -16,6 +17,8 @@ let db = SQlite.openDatabase({
 });
 
 const Chapters = ({navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
   let [flatListItems, setFlatListItems] = useState([]);
   let [book, setBook] = useState(1);
 
@@ -73,7 +76,17 @@ const Chapters = ({navigation}) => {
   };
 
   const parentView = {
+    display: 'flex',
+    flexDirection: 'column',
     height: '100%',
+    backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
+  };
+
+  const itemName= {
+    fontSize: 16,
+    color: '#000000',
+    fontWeight: '600',
+    color: isDarkMode ? '#ffffff' : '#030303',
   };
 
   return (
@@ -88,7 +101,7 @@ const Chapters = ({navigation}) => {
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => selectBook(item.c)}>
             <View style={[styles.itemContainer, {backgroundColor: item.code}]}>
-              <Text style={styles.itemName}>{item.c}</Text>
+              <Text style={itemName}>{item.c}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -111,11 +124,6 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 100,
     alignItems: 'center',
-  },
-  itemName: {
-    fontSize: 16,
-    color: '#000000',
-    fontWeight: '600',
   },
   itemCode: {
     fontWeight: '600',
