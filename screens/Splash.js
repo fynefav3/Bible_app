@@ -23,7 +23,7 @@ const Splash = ({navigation}) => {
 export default Splash;
 
 const styles = StyleSheet.create({
-  parentView: {backgroundColor: '#ffffff', flex: 1},
+  parentView: {backgroundColor: '#060918', flex: 1},
   subParent: {flex: 1, paddingTop: 50},
   splashImg: {
     width: '100%',
